@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopora | Order Successful</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5ed;
+            color: #263d2d;
+            text-align: center;
+            padding: 60px 20px;
+        }
+        .card {
+            max-width: 500px;
+            margin: auto;
+            padding: 35px;
+            background: white;
+            border-radius: 15px;
+        }
+        h1 { color: #285b42; }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 22px;
+            background: #285b42;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>🎉 Order Placed Successfully!</h1>
+        <p>Thank you for shopping with Shopora.</p>
+        <p>Order ID: #{{ order.id }}</p>
+        <p>Total Amount: ₹{{ order.total_amount }}</p>
+        <p>Payment Method: Cash on Delivery</p>
+        <a href="/">Continue Shopping</a>
+    </div>
+</body>
+</html>

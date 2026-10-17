@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopora | Your Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5ed;
+            color: #263d2d;
+            margin: 0;
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        h1 {
+            color: #285b42;
+        }
+
+        .cart-item {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .price {
+            font-weight: bold;
+        }
+
+        .remove {
+            background: #f4e2df;
+            color: #a33d32;
+            border: none;
+            padding: 9px 13px;
+            border-radius: 7px;
+            cursor: pointer;
+        }
+
+        
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 12px 0;
+}
+
+.quantity-controls form {
+    margin: 0;
+}
+
+.quantity-controls button {
+    background: #285b42;
+    color: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.quantity-controls button:hover {
+    background: #1d4431;
+}
+
+
+        .total {
+            text-align: right;
+            font-size: 22px;
+            font-weight: bold;
+            margin: 25px 0;
+        }
+
+        .back {
+            color: #285b42;
+            text-decoration: none;
+        }
+
+        .empty {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        
+/* Shopora Professional Cart */
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f5ed;
+    color: #263d2d;
+}
+
+h1, h2, h3 {
+    color: #24392d;
+}
+
+button, .checkout-button, a.button {
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+button:hover, .checkout-button:hover, a.button:hover {
+    transform: translateY(-1px);
+}
+
+input, textarea, select {
+    border: 1px solid #dce3da;
+    border-radius: 9px;
+    padding: 11px 12px;
+    font: inherit;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: #285b42;
+    box-shadow: 0 0 0 3px rgba(40, 91, 66, 0.10);
+}
+
+a {
+    color: #285b42;
+}
+
+a:hover {
+    color: #1d4531;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🛍️ Your Shopping Cart</h1>
+        <p>Your everyday favourites, all in one place.</p>
+
+        <a class="back" href="/">← Continue Shopping</a>
+
+        {% if cart_items %}
+            {% for item in cart_items %}
+                <div class="cart-item">
+                    <div>
+                        <h3>{{ item.product.name }}</h3>
+                        <p>{{ item.product.category }}</p>
+                        <p>Price: ₹{{ item.product.price }}</p>
+                        <div class="quantity-controls">
+    <form method="post" action="{% url 'decrease_quantity' item.product.id %}">
+        {% csrf_token %}
+        <button type="submit">−</button>
+    </form>
+
+    <span>Quantity: {{ item.quantity }}</span>
+
+    <form method="post" action="{% url 'increase_quantity' item.product.id %}">
+        {% csrf_token %}
+        <button type="submit">+</button>
+    </form>
+</div>
+                        <p class="price">Subtotal: ₹{{ item.subtotal }}</p>
+                    </div>
+
+                    <form method="post"
+                          action="{% url 'remove_from_cart' item.product.id %}">
+                        {% csrf_token %}
+                        <button class="remove" type="submit">
+                            Remove
+                        </button>
+                    </form>
+                </div>
+            {% endfor %}
+
+            <div class="total">
+                Total: ₹{{ total }}
+            </div>
+            
+<div style="text-align: right; margin-top: 20px;">
+    <a href="{% url 'checkout' %}"
+       style="display: inline-block;
+              background: #285b42;
+              color: white;
+              padding: 14px 24px;
+              border-radius: 8px;
+              text-decoration: none;
+              font-weight: bold;">
+        Proceed to Checkout →
+    </a>
+</div>
+
+        {% else %}
+            <div class="empty">
+                <h2>Your cart is empty!</h2>
+                <p>Add some products to get started.</p>
+                <a class="back" href="/">Explore Products</a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

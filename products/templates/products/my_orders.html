@@ -1,0 +1,211 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopora | My Orders</title>
+    
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background: #f5f5ed;
+        color: #24392d;
+        margin: 0;
+        padding: 36px 18px;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .back {
+        display: inline-block;
+        color: #285b42;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 22px;
+        transition: color 0.2s;
+    }
+
+    .back:hover {
+        color: #71916e;
+    }
+
+    h1 {
+        color: #24392d;
+        font-size: 32px;
+        letter-spacing: -0.8px;
+        margin: 0 0 8px;
+    }
+
+    .page-subtitle {
+        color: #6b796b;
+        font-size: 14px;
+        line-height: 1.7;
+        margin: 0 0 28px;
+    }
+
+    .order {
+        background: #ffffff;
+        padding: 26px;
+        margin: 20px 0;
+        border: 1px solid #e4e9e0;
+        border-radius: 16px;
+        box-shadow: 0 5px 20px rgba(36, 57, 45, 0.045);
+        transition: box-shadow 0.2s, transform 0.2s;
+    }
+
+    .order:hover {
+        box-shadow: 0 10px 26px rgba(36, 57, 45, 0.08);
+        transform: translateY(-2px);
+    }
+
+    .order h3 {
+        color: #285b42;
+        font-size: 19px;
+        margin: 0 0 18px;
+    }
+
+    .order p {
+        margin: 12px 0;
+        font-size: 14px;
+        line-height: 1.7;
+        overflow-wrap: anywhere;
+    }
+
+    .order strong {
+        color: #354c3b;
+    }
+
+    .status {
+        display: inline-block;
+        background: #fff3cd;
+        color: #856404;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        margin-left: 6px;
+    }
+
+    .order h4 {
+        color: #285b42;
+        font-size: 15px;
+        margin: 24px 0 12px;
+        padding-top: 18px;
+        border-top: 1px solid #edf0e9;
+    }
+
+    .order .product-line {
+        background: #f7f8f3;
+        border-radius: 9px;
+        padding: 12px 14px;
+        margin: 8px 0;
+    }
+
+    .order .total {
+        font-size: 17px;
+        color: #285b42;
+    }
+
+    .empty {
+        background: #ffffff;
+        padding: 32px 24px;
+        border: 1px solid #e4e9e0;
+        border-radius: 16px;
+        box-shadow: 0 5px 20px rgba(36, 57, 45, 0.04);
+        line-height: 1.8;
+    }
+
+    .empty p {
+        color: #647264;
+    }
+
+    .empty .back {
+        margin: 8px 0 0;
+        background: #285b42;
+        color: #ffffff;
+        padding: 12px 18px;
+        border-radius: 9px;
+    }
+
+    .empty .back:hover {
+        background: #1d4531;
+    }
+
+    @media (max-width: 600px) {
+        body {
+            padding: 24px 14px;
+        }
+
+        h1 {
+            font-size: 27px;
+        }
+
+        .order {
+            padding: 19px;
+        }
+
+        .status {
+            margin: 6px 0 0;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <div class="container">
+        <a class="back" href="{% url 'product_list' %}">
+            ← Continue Shopping
+        </a>
+
+        <h1>My Orders</h1>
+<p class="page-subtitle">
+    Track your purchases and view your order details.
+</p>
+
+        {% for order in orders %}
+            <div class="order">
+                <h3>Order #{{ order.id }}</h3>
+                
+<p>
+    <strong>Order Status:</strong>
+    <span class="status">{{ order.status }}</span>
+</p>
+
+                <p><strong>Date:</strong> {{ order.created_at|date:"d M Y, h:i A" }}</p>
+                <p class="total">
+    <strong>Total Amount:</strong> ₹{{ order.total_amount|floatformat:2 }}
+</p>
+                <p><strong>Delivery Address:</strong>
+                    {{ order.address }}, {{ order.city }} - {{ order.pincode }}
+                </p>
+
+                <h4>Products</h4>
+                {% for item in order.items.all %}
+                    <p class="product-line">
+    {{ item.product.name }} × {{ item.quantity }}
+    — ₹{{ item.price|floatformat:2 }}
+</p>
+                {% empty %}
+                    <p>Product details unavailable.</p>
+                {% endfor %}
+            </div>
+        {% empty %}
+            <div class="empty">
+                <p>You haven't placed any orders yet.</p>
+                <a class="back" href="{% url 'product_list' %}">
+                    Start Shopping
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

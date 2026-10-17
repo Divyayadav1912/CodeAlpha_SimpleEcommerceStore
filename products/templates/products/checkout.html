@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopora | Checkout</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5ed;
+            color: #263d2d;
+            margin: 0;
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: auto;
+        }
+
+        h1, h2 {
+            color: #285b42;
+        }
+
+        .back {
+            color: #285b42;
+            text-decoration: none;
+        }
+
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 7px;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccd5cc;
+            border-radius: 7px;
+            font-size: 15px;
+            font-family: inherit;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .place-order {
+            width: 100%;
+            padding: 14px;
+            margin-top: 20px;
+            background: #285b42;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .place-order:hover {
+            background: #1d4431;
+        }
+
+        @media (max-width: 700px) {
+            .checkout-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🛍️ Checkout</h1>
+        <p>You're one step away from your favourites!</p>
+
+        <a class="back" href="{% url 'view_cart' %}">
+            ← Back to Cart
+        </a>
+
+        <div class="checkout-layout">
+            <div class="card">
+                <h2>Delivery Details</h2>
+
+                {% if messages %}
+    {% for message in messages %}
+        <p>{{ message }}</p>
+    {% endfor %}
+{% endif %}
+
+                <form method="post" action="#">
+                    {% csrf_token %}
+
+                    <label for="full_name">Full Name</label>
+                    <input type="text" id="full_name"
+                           name="full_name" required>
+
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone"
+                           name="phone" pattern="[0-9]{10}"
+                           maxlength="10" minlength="10" required>
+
+                    <label for="address">Full Address</label>
+                    <textarea id="address" name="address"
+                              placeholder="House no., street, area"
+                              required></textarea>
+
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city" required>
+
+                    <label for="pincode">PIN Code</label>
+                    <input type="text" id="pincode" name="pincode"
+                           pattern="[0-9]{6}" maxlength="6"
+                           minlength="6" required>
+
+                    <button type="submit" class="place-order">
+                        Place Order
+                    </button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>Order Summary</h2>
+
+                {% for item in cart_items %}
+                    <div class="order-item">
+                        <div>
+                            <strong>{{ item.product.name }}</strong>
+                            <p>Quantity: {{ item.quantity }}</p>
+                        </div>
+
+                        <strong>₹{{ item.subtotal }}</strong>
+                    </div>
+                {% endfor %}
+
+                <div class="total">
+                    <span>Total</span>
+                    <span>₹{{ total }}</span>
+                </div>
+
+                <p>Payment: Cash on Delivery (COD)</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

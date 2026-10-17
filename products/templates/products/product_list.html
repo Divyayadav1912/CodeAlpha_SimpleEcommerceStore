@@ -1,0 +1,661 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopora | Everyday Essentials</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f8f3;
+            color: #24392d;
+        }
+
+        header {
+            background: white;
+            padding: 20px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            border-bottom: 1px solid #e8ece5;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: #285b42;
+        }
+
+        
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 18px rgba(36, 57, 45, 0.05);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.header-actions a {
+    color: #285b42;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.header-actions a:hover {
+    color: #71916e;
+}
+
+.header-actions .signup-link,
+.header-actions .logout-button {
+    background: #285b42;
+    color: white;
+    padding: 11px 16px;
+    border: none;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.header-actions .signup-link:hover,
+.header-actions .logout-button:hover {
+    background: #1d4531;
+}
+
+.header-actions .welcome {
+    font-size: 14px;
+    color: #536957;
+}
+
+.header-actions form {
+    margin: 0;
+}
+
+.search {
+    outline: none;
+    background: #f7f8f3;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search:focus {
+    border-color: #285b42;
+    box-shadow: 0 0 0 3px rgba(40, 91, 66, 0.10);
+}
+
+@media (max-width: 700px) {
+    header {
+        gap: 14px;
+    }
+
+    .header-actions {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 12px;
+    }
+
+    .search {
+        flex: 1;
+        min-width: 180px;
+    }
+}
+
+
+        .search {
+            padding: 12px 16px;
+            border: 1px solid #dce3da;
+            border-radius: 10px;
+            width: min(320px, 100%);
+        }
+
+        .hero {
+            margin: 30px auto;
+            width: 86%;
+            padding: 55px 7%;
+            border-radius: 22px;
+            background: #dfead5;
+        }
+
+        .hero small {
+            color: #42684b;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 52px);
+            margin: 18px 0;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            color: #536957;
+            line-height: 1.7;
+            max-width: 460px;
+        }
+
+        .shop-button {
+            margin-top: 22px;
+            padding: 14px 20px;
+            background: #285b42;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .benefits {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            width: 86%;
+            margin: 25px auto 45px;
+        }
+
+        .benefit {
+            padding: 20px;
+            background: white;
+            border: 1px solid #e8ece5;
+            border-radius: 14px;
+        }
+
+        .benefit p {
+            color: #778278;
+            font-size: 13px;
+            margin-top: 7px;
+        }
+
+        .catalog {
+            width: 86%;
+            margin: auto;
+            padding-bottom: 60px;
+        }
+
+        .section-heading {
+            margin-bottom: 25px;
+        }
+
+        .section-heading h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .section-heading p {
+            color: #778278;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e8ece5;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px #24392d12;
+        }
+
+        .product-visual {
+            height: 175px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e7eddf;
+            font-size: 65px;
+        }
+
+        .product-info {
+            padding: 18px;
+        }
+
+        .category {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #78877a;
+        }
+
+        .product-info h3 {
+            font-size: 17px;
+            margin: 10px 0;
+        }
+
+        .description {
+            font-size: 13px;
+            color: #778278;
+            line-height: 1.5;
+            min-height: 40px;
+        }
+
+        .price {
+            color: #285b42;
+            font-size: 19px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .stock {
+            color: #778278;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .add-button {
+            width: 100%;
+            margin-top: 14px;
+            padding: 11px;
+            background: #285b42;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            cursor: pointer;
+        }
+
+        .add-button:hover,
+        .shop-button:hover {
+            background: #1d4531;
+        }
+
+        footer {
+            padding: 25px;
+            text-align: center;
+            background: #203e2c;
+            color: white;
+            font-size: 13px;
+        }
+
+        @media (max-width: 900px) {
+            .products {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .benefits {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 520px) {
+            header {
+                padding: 18px 5%;
+            }
+
+            .hero,
+            .catalog,
+            .benefits {
+                width: 90%;
+            }
+
+            .hero {
+                padding: 35px 25px;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+        }
+
+/* Professional Product Cards */
+.card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e4e9e0;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #ffffff;
+    box-shadow: 0 5px 18px rgba(36, 57, 45, 0.04);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(36, 57, 45, 0.10);
+}
+
+.product-visual {
+    overflow: hidden;
+    height: 190px;
+    flex-shrink: 0;
+    background: #eef1e8;
+}
+
+.product-visual img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.card:hover .product-visual img {
+    transform: scale(1.04);
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 18px;
+}
+
+.add-button {
+    width: 100%;
+    margin-top: auto;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 10px;
+    background: #285b42;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.add-button:hover:not(:disabled) {
+    background: #1d4531;
+    transform: translateY(-1px);
+}
+
+.add-button:disabled {
+    background: #a7b2a6;
+    cursor: not-allowed;
+}
+
+
+/* Professional Hero Section */
+.hero {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #e5eddc 0%, #dce8d1 100%);
+    border: 1px solid #e0e8d8;
+    box-shadow: 0 12px 35px rgba(36, 57, 45, 0.04);
+}
+
+.hero h1 {
+    color: #24392d;
+    letter-spacing: -1.5px;
+    line-height: 1.12;
+}
+
+.hero p {
+    color: #526b58;
+    line-height: 1.8;
+}
+
+.hero button {
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.hero button:hover {
+    background: #1d4531;
+    transform: translateY(-2px);
+}
+
+
+/* Professional Benefits Cards */
+.benefits {
+    gap: 22px;
+    margin-top: 36px;
+    margin-bottom: 52px;
+}
+
+.benefits > div {
+    background: #ffffff;
+    border: 1px solid #e5eae1;
+    border-radius: 16px;
+    padding: 26px 24px;
+    box-shadow: 0 5px 18px rgba(36, 57, 45, 0.035);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.benefits > div:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(36, 57, 45, 0.08);
+}
+
+.benefits h3 {
+    color: #285b42;
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.benefits p {
+    color: #667568;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+
+/* Professional Product Section */
+.catalog {
+    padding-top: 18px;
+    padding-bottom: 48px;
+}
+
+.catalog h2 {
+    color: #24392d;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+}
+
+.products {
+    gap: 24px;
+}
+
+.product-info h3 {
+    color: #24392d;
+    font-size: 18px;
+    line-height: 1.4;
+}
+
+.product-info p {
+    color: #687568;
+    line-height: 1.65;
+}
+
+.product-info .price {
+    color: #285b42;
+    font-size: 21px;
+    font-weight: 800;
+}
+
+/* Professional Footer */
+footer {
+    margin-top: 30px;
+    padding: 28px 7%;
+    background: #24392d;
+    color: #e8eee5;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+
+    </style>
+</head>
+
+<body>
+    
+
+<header>
+    <div class="logo">✳ Shopora</div>
+
+    <input
+        class="search"
+        id="searchInput"
+        type="search"
+        placeholder="Search products..."
+        aria-label="Search products"
+    >
+
+    <nav class="header-actions">
+        {% if user.is_authenticated %}
+            <span class="welcome">
+                Welcome, {{ user.first_name|default:user.username }}
+            </span>
+
+            <a href="{% url 'my_orders' %}">My Orders</a>
+
+            <form method="post" action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button class="logout-button" type="submit">
+                    Logout
+                </button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            <a class="signup-link" href="{% url 'signup' %}">
+                Sign Up
+            </a>
+        {% endif %}
+    </nav>
+</header>
+
+
+
+    <section class="hero">
+        <small>THOUGHTFUL THINGS, EVERYDAY</small>
+        <h1>Small upgrades.<br>Better everyday.</h1>
+        <p>
+            Discover useful, thoughtfully designed products for your
+            home, workspace and daily routine.
+        </p>
+        <button class="shop-button" onclick="scrollToProducts()">
+            Explore Products →
+        </button>
+    </section>
+
+    <section class="benefits">
+        <div class="benefit">
+            <strong>📦 Easy Shopping</strong>
+            <p>Find your everyday essentials in one place.</p>
+        </div>
+        <div class="benefit">
+            <strong>🌿 Thoughtful Finds</strong>
+            <p>Useful products for work, home and life.</p>
+        </div>
+        <div class="benefit">
+            <strong>🛍️ Your Shopping Journey</strong>
+            <p>Explore products and discover your favourites.</p>
+        </div>
+    </section>
+
+    <main class="catalog" id="catalog">
+        <div class="section-heading">
+            <h2>Our Collection</h2>
+            <p>Find something you'll love.</p>
+        </div>
+
+        <div class="products" id="productList">
+            {% for product in products %}
+                <article class="card">
+                    <div class="product-visual">
+                        {% if product.image %}
+                            <img
+                                src="{{ product.image }}"
+                                alt="{{ product.name }}"
+                                style="width:100%;height:100%;object-fit:cover;"
+                            >
+                        {% else %}
+                            {% if product.category == "Home" %}
+                                ☕
+                            {% elif product.category == "Accessories" %}
+                                👜
+                            {% elif product.category == "Workspace" %}
+                                💡
+                            {% elif product.category == "Tech" %}
+                                🎧
+                            {% else %}
+                                🌿
+                            {% endif %}
+                        {% endif %}
+                    </div>
+
+                    <div class="product-info">
+                        <div class="category">{{ product.category }}</div>
+                        <h3>{{ product.name }}</h3>
+                        <p class="description">{{ product.description }}</p>
+                        <div class="price">₹{{ product.price }}</div>
+                        <div class="stock">
+                            {% if product.stock > 0 %}
+                                {{ product.stock }} available
+                            {% else %}
+                                Out of stock
+                            {% endif %}
+                        </div>
+                            <form method="post" action="{% url 'add_to_cart' product.id %}">
+    {% csrf_token %}
+    <button
+        class="add-button"
+        type="submit"
+        {% if product.stock == 0 %}disabled{% endif %}
+    >
+        {% if product.stock > 0 %}
+            + Add to Cart
+        {% else %}
+            Out of Stock
+        {% endif %}
+    </button>
+</form>
+                    </div>
+                </article>
+            {% empty %}
+                <p>No products available yet. Add products from Django Admin.</p>
+            {% endfor %}
+        </div>
+    </main>
+
+    <footer>
+        © 2026 Shopora · Your everyday shopping destination
+    </footer>
+
+    <script>
+        function scrollToProducts() {
+            document.getElementById("catalog").scrollIntoView({
+                behavior: "smooth"
+            });
+        }
+
+        const searchInput = document.getElementById("searchInput");
+        const productCards = document.querySelectorAll(".card");
+
+        searchInput.addEventListener("input", function () {
+            const searchText = this.value.toLowerCase();
+
+            productCards.forEach(function (card) {
+                const productText = card.innerText.toLowerCase();
+                card.style.display = productText.includes(searchText)? "" : "none";
+            });
+        });
+    </script>
+</body>
+</html>
