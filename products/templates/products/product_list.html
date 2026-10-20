@@ -499,6 +499,114 @@ footer {
     line-height: 1.7;
 }
 
+/* Shopora design improvements */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+}
+
+header {
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+.logo {
+    letter-spacing: -0.8px;
+    white-space: nowrap;
+}
+
+.search {
+    flex: 1;
+    max-width: 320px;
+    min-width: 180px;
+    font-size: 14px;
+}
+
+.hero {
+    margin-top: 36px;
+    margin-bottom: 32px;
+    min-height: 290px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.shop-button {
+    font-size: 14px;
+    font-weight: 700;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.shop-button:hover {
+    box-shadow: 0 6px 16px rgba(40, 91, 66, 0.18);
+}
+
+.product-visual {
+    height: 220px;
+}
+
+.product-visual img {
+    object-fit: cover;
+    object-position: center;
+}
+
+.product-info {
+    gap: 3px;
+}
+
+.product-info .description {
+    min-height: 42px;
+}
+
+.product-info .stock {
+    margin-top: 10px;
+}
+
+.add-button {
+    margin-top: 16px;
+    min-height: 44px;
+}
+
+.section-heading {
+    margin-bottom: 28px;
+}
+
+.section-heading h2 {
+    font-size: clamp(25px, 3vw, 32px);
+    letter-spacing: -0.8px;
+}
+
+@media (max-width: 700px) {
+    .hero {
+        min-height: auto;
+    }
+
+    .product-visual {
+        height: 240px;
+    }
+
+    .search {
+        max-width: none;
+        width: 100%;
+        flex-basis: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+    }
+}
 
     </style>
 </head>
