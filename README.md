@@ -1,4 +1,8 @@
-# Shopora – Simple E-commerce Store
+## 🚀 Live Demo
+
+Explore the live Shopora website here:
+
+**[Visit Shopora](https://shopora-xd8p.onrender.com)**
 
 Shopora is a full-stack e-commerce web application developed using Django and Python. It provides a simple shopping experience where users can browse products, manage their cart, place orders, and track their purchases.
 
